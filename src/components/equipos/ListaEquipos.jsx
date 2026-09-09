@@ -68,25 +68,18 @@ const normalizarCategoria = (valor) =>
 const columnasPorCategoria = {
   inmuebles: [
     { key: "index", label: "#", ancho: "80" },
-    { key: "ordenCompra", label: "Orden de Compra", ancho: "160" },
-    { key: "factura", label: "Factura", ancho: "160" },
-    { key: "proveedor", label: "Proveedor", ancho: "180" },
-    { key: "fechaIngreso", label: "Fecha Ingreso", ancho: "140" },
-    { key: "hojaNo", label: "Hoja No.", ancho: "100" },
-    { key: "fechaActualizacion", label: "Fecha Actualizacion", ancho: "140" },
-    { key: "asignaciones", label: "Asignado a", ancho: "220" },
-    { key: "codificacion", label: "Codificación", ancho: "180" },
-    { key: "categoria", label: "Categoría", ancho: "160" },
-    { key: "familia", label: "Familia", ancho: "180" },
-    { key: "estado", label: "Estado", ancho: "140" },
+    { key: "ordenCompra", label: "No. De Orden de compra", ancho: "180" },
+    { key: "fechaOrdenCompra", label: "Fecha de la Orden de compra", ancho: "180" },
+    { key: "factura", label: "No. Factura electrónica", ancho: "180" },
+    { key: "proveedor", label: "Nombre de Proveedor", ancho: "200" },
+    { key: "fechaFactura", label: "Fecha factura", ancho: "140" },
     { key: "descripcionBien", label: "Descripción del bien", ancho: "220" },
+    { key: "estado", label: "Estado", ancho: "180" },
     { key: "direccion", label: "Dirección", ancho: "220" },
     { key: "fichaTecnica", label: "Ficha técnica", ancho: "220" },
-    { key: "multimedia", label: "Documentos e imágenes", ancho: "220" },
-    { key: "polizaSeguro", label: "Póliza de seguro", ancho: "180" },
-    { key: "ubicacion", label: "Ubicación", ancho: "180" },
-    { key: "comentarios", label: "Comentarios", ancho: "220" },
-    { key: "observaciones", label: "Observaciones", ancho: "220" },
+    { key: "multimedia", label: "Apartado multimedia", ancho: "220" },
+    { key: "polizaSeguro", label: "Pólizas de seguro", ancho: "220" },
+    { key: "catalogoActivos", label: "Catálogo de activos", ancho: "200" },
   ],
   "mobiliario y equipo": [
     { key: "index", label: "#", ancho: "80" },
@@ -104,11 +97,36 @@ const columnasPorCategoria = {
     { key: "tipoEquipo", label: "Equipo", ancho: "140" },
     { key: "marca", label: "Marca", ancho: "140" },
     { key: "modelo", label: "Modelo", ancho: "140" },
-    { key: "numeroChapa", label: "Número de chapa", ancho: "160" },
+    { key: "numeroChapa", label: "Número de chapa del activo", ancho: "180" },
     { key: "controlLlaves", label: "Control de llaves", ancho: "160" },
     { key: "estadoFisico", label: "Estado físico actual", ancho: "180" },
     { key: "color", label: "Color", ancho: "140" },
     { key: "dimensiones", label: "Dimensiones", ancho: "160" },
+    { key: "catalogoActivos", label: "Catálogo de activos", ancho: "180" },
+    { key: "reporteDanios", label: "Reporte de daños o incidencias", ancho: "220" },
+    { key: "ubicacion", label: "Ubicación", ancho: "180" },
+    { key: "comentarios", label: "Comentarios", ancho: "220" },
+    { key: "observaciones", label: "Observaciones", ancho: "220" },
+  ],
+  "equipo de computo": [
+    { key: "index", label: "#", ancho: "80" },
+    { key: "ordenCompra", label: "Orden de Compra", ancho: "160" },
+    { key: "factura", label: "Factura", ancho: "160" },
+    { key: "proveedor", label: "Proveedor", ancho: "180" },
+    { key: "fechaIngreso", label: "Fecha Ingreso", ancho: "140" },
+    { key: "hojaNo", label: "Hoja No.", ancho: "100" },
+    { key: "fechaActualizacion", label: "Fecha Actualizacion", ancho: "140" },
+    { key: "asignaciones", label: "Asignado a", ancho: "220" },
+    { key: "codificacion", label: "Codificación", ancho: "180" },
+    { key: "categoria", label: "Categoría", ancho: "160" },
+    { key: "familia", label: "Familia", ancho: "180" },
+    { key: "estado", label: "Estado", ancho: "140" },
+    { key: "tipoEquipo", label: "Equipo", ancho: "140" },
+    { key: "marca", label: "Marca", ancho: "140" },
+    { key: "modelo", label: "Modelo", ancho: "140" },
+    { key: "serie", label: "Serie", ancho: "160" },
+    { key: "catalogoActivos", label: "Catálogo de activos", ancho: "180" },
+    { key: "reporteDanios", label: "Reporte de daños o incidencias", ancho: "220" },
     { key: "ubicacion", label: "Ubicación", ancho: "180" },
     { key: "comentarios", label: "Comentarios", ancho: "220" },
     { key: "observaciones", label: "Observaciones", ancho: "220" },
@@ -173,7 +191,7 @@ const renderizarValorCelda = (equipo, key) => {
     );
   }
 
-  if (key === "fechaIngreso" || key === "fechaActualizacion") {
+  if (["fechaIngreso", "fechaActualizacion", "fechaOrdenCompra", "fechaFactura"].includes(key)) {
     const fecha = equipo[key];
     return fecha ? new Date(fecha).toLocaleDateString("es-ES") : "Sin fecha";
   }
@@ -184,6 +202,14 @@ const renderizarValorCelda = (equipo, key) => {
 
   if (key === "polizaSeguro") {
     return equipo.polizaSeguro || "-";
+  }
+
+  if (key === "catalogoActivos") {
+    return equipo.catalogoActivos || equipo.catalogoActivo || equipo.catalogo || "-";
+  }
+
+  if (key === "reporteDanios") {
+    return equipo.reporteDanios || equipo.reporteDeDanios || equipo.reportes || "-";
   }
 
   if (key === "modeloAnio") {
