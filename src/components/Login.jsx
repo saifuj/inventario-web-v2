@@ -32,7 +32,7 @@ export default function Login() {
       localStorage.setItem("tokenApp", data.token);
       localStorage.setItem("rol", data.rol);
 
-      navigate("/dashboard");
+      navigate("/inicio");
     } catch (error) {
       console.error("Error en login:", error);
       alert("No puedes ingresar, no tienes acceso.");

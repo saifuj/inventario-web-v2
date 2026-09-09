@@ -71,6 +71,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
   const [rol, setRol] = useState(null);
 
   const isActive = (path) => location.pathname === path;
+  const isAdminRole = (value) => String(value || "").trim().toLowerCase() === "administrador";
 
   useEffect(() => {
     const storedRol = localStorage.getItem("rol");
@@ -217,7 +218,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
                     {abierta && (
                       <div className="ml-6 mt-1 flex flex-col gap-1 border-l border-blue-400/30 pl-3">
                         <Link to={rutaInventario} className={subLinkClass(false)}><FaClipboardList /> Inventario</Link>
-                        {rol === "Administrador" && <>
+                        {isAdminRole(rol) && <>
                           <Link to={`/equipos/crear?categoria=${parametro}`} className={subLinkClass(false)}><FaUpload /> Ingresar</Link>
                           <Link to={`/equipos/editar?categoria=${parametro}`} className={subLinkClass(false)}><FaEdit /> Editar</Link>
                           <Link to={`/equipos/eliminar?categoria=${parametro}`} className={subLinkClass(false)}><FaTrash /> Eliminar</Link>
@@ -238,7 +239,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
               {suministrosOpen ? <FaChevronUp className="text-xs" /> : <FaChevronDown className="text-xs" />}
             </button>
             <div className={`ml-6 mt-1 flex flex-col gap-2 overflow-hidden transition-all duration-500 ${suministrosOpen ? "max-h-48" : "max-h-0"}`}>
-              {rol === "Administrador" && (
+              {isAdminRole(rol) && (
                 <>
                   <Link to="/suministros" className={subLinkClass(isActive("/suministros"))}>
                     <FaPlus /> Crear Suministro
@@ -265,7 +266,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
               {mantenimientosOpen ? <FaChevronUp className="text-xs" /> : <FaChevronDown className="text-xs" />}
             </button>
             <div className={`ml-6 mt-1 flex flex-col gap-2 overflow-hidden transition-all duration-500 ${mantenimientosOpen ? "max-h-32" : "max-h-0"}`}>
-              {rol === "Administrador" && (
+              {isAdminRole(rol) && (
                 <>
                   <Link to="/solicitudes/crear" className={subLinkClass(isActive("/solicitudes/crear"))}>
                     <FaUpload /> Crear
@@ -327,7 +328,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
               <div className={modalPanelClass}>
                 <h2 className={modalTitleClass}>Selecciona una opción</h2>
                 <div className="flex flex-col gap-3">
-                  {rol === "Administrador" && (
+                  {isAdminRole(rol) && (
                     <button onClick={() => handleHojaOption("/formatos/hojaderesponsabilidad")} className={modalPrimaryBtnClass}>
                       Crear
                     </button>
@@ -349,7 +350,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
               <div className={modalPanelClass}>
                 <h2 className={modalTitleClass}>Solvencias</h2>
                 <div className="flex flex-col gap-3">
-                  {rol === "Administrador" && (
+                  {isAdminRole(rol) && (
                     <button onClick={() => handleSolvenciaOption("/formatos/hojasSolvencias")} className={modalPrimaryBtnClass}>
                       Crear
                     </button>
@@ -371,7 +372,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
               <div className={modalPanelClass}>
                 <h2 className={modalTitleClass}>Traslados</h2>
                 <div className="flex flex-col gap-3">
-                  {rol === "Administrador" && (
+                  {isAdminRole(rol) && (
                     <button onClick={() => handleTrasladoOption("/formatos/traslados/crear")} className={modalPrimaryBtnClass}>
                       Crear
                     </button>
@@ -393,7 +394,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
               <div className={modalPanelClass}>
                 <h2 className={modalTitleClass}>Bajas de Activos</h2>
                 <div className="flex flex-col gap-3">
-                  {rol === "Administrador" && (
+                  {isAdminRole(rol) && (
                     <button onClick={() => handleBajasActivoOption("/formatos/bajaAtivos")} className={modalPrimaryBtnClass}>
                       Crear Baja
                     </button>
@@ -415,7 +416,7 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
               <div className={modalPanelClass}>
                 <h2 className={modalTitleClass}>Selecciona una opción</h2>
                 <div className="flex flex-col gap-3">
-                  {rol === "Administrador" && (
+                  {isAdminRole(rol) && (
                     <button onClick={() => handleTrasladoRetornoOption("/formatos/trasladosRetorno/crear")} className={modalPrimaryBtnClass}>
                       Crear Traslado Retorno
                     </button>
