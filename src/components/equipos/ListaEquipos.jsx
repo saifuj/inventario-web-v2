@@ -34,6 +34,175 @@ const camposFiltro = [
   { label: "Observaciones", value: "observaciones", tipo: "texto" },
 ];
 
+const columnasGenericas = [
+  { key: "index", label: "#", ancho: "80" },
+  { key: "ordenCompra", label: "Orden de Compra", ancho: "160" },
+  { key: "factura", label: "Factura", ancho: "160" },
+  { key: "proveedor", label: "Proveedor", ancho: "180" },
+  { key: "fechaIngreso", label: "Fecha Ingreso", ancho: "140" },
+  { key: "hojaNo", label: "Hoja No.", ancho: "100" },
+  { key: "fechaActualizacion", label: "Fecha Actualizacion", ancho: "140" },
+  { key: "asignaciones", label: "Asignado a", ancho: "220" },
+  { key: "codificacion", label: "Codificación", ancho: "180" },
+  { key: "categoria", label: "Categoría", ancho: "160" },
+  { key: "familia", label: "Familia", ancho: "180" },
+  { key: "estado", label: "Estado", ancho: "140" },
+  { key: "tipoEquipo", label: "Equipo", ancho: "140" },
+  { key: "marca", label: "Marca", ancho: "140" },
+  { key: "modelo", label: "Modelo", ancho: "140" },
+  { key: "serie", label: "Serie", ancho: "160" },
+  { key: "responsableAnterior", label: "Responsable Anterior", ancho: "180" },
+  { key: "extension", label: "Extensión", ancho: "120" },
+  { key: "ubicacion", label: "Ubicación", ancho: "180" },
+  { key: "comentarios", label: "Comentarios", ancho: "220" },
+  { key: "observaciones", label: "Observaciones", ancho: "220" },
+];
+
+const normalizarCategoria = (valor) =>
+  String(valor ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
+const columnasPorCategoria = {
+  inmuebles: [
+    { key: "index", label: "#", ancho: "80" },
+    { key: "ordenCompra", label: "Orden de Compra", ancho: "160" },
+    { key: "factura", label: "Factura", ancho: "160" },
+    { key: "proveedor", label: "Proveedor", ancho: "180" },
+    { key: "fechaIngreso", label: "Fecha Ingreso", ancho: "140" },
+    { key: "hojaNo", label: "Hoja No.", ancho: "100" },
+    { key: "fechaActualizacion", label: "Fecha Actualizacion", ancho: "140" },
+    { key: "asignaciones", label: "Asignado a", ancho: "220" },
+    { key: "codificacion", label: "Codificación", ancho: "180" },
+    { key: "categoria", label: "Categoría", ancho: "160" },
+    { key: "familia", label: "Familia", ancho: "180" },
+    { key: "estado", label: "Estado", ancho: "140" },
+    { key: "descripcionBien", label: "Descripción del bien", ancho: "220" },
+    { key: "direccion", label: "Dirección", ancho: "220" },
+    { key: "fichaTecnica", label: "Ficha técnica", ancho: "220" },
+    { key: "multimedia", label: "Documentos e imágenes", ancho: "220" },
+    { key: "polizaSeguro", label: "Póliza de seguro", ancho: "180" },
+    { key: "ubicacion", label: "Ubicación", ancho: "180" },
+    { key: "comentarios", label: "Comentarios", ancho: "220" },
+    { key: "observaciones", label: "Observaciones", ancho: "220" },
+  ],
+  "mobiliario y equipo": [
+    { key: "index", label: "#", ancho: "80" },
+    { key: "ordenCompra", label: "Orden de Compra", ancho: "160" },
+    { key: "factura", label: "Factura", ancho: "160" },
+    { key: "proveedor", label: "Proveedor", ancho: "180" },
+    { key: "fechaIngreso", label: "Fecha Ingreso", ancho: "140" },
+    { key: "hojaNo", label: "Hoja No.", ancho: "100" },
+    { key: "fechaActualizacion", label: "Fecha Actualizacion", ancho: "140" },
+    { key: "asignaciones", label: "Asignado a", ancho: "220" },
+    { key: "codificacion", label: "Codificación", ancho: "180" },
+    { key: "categoria", label: "Categoría", ancho: "160" },
+    { key: "familia", label: "Familia", ancho: "180" },
+    { key: "estado", label: "Estado", ancho: "140" },
+    { key: "tipoEquipo", label: "Equipo", ancho: "140" },
+    { key: "marca", label: "Marca", ancho: "140" },
+    { key: "modelo", label: "Modelo", ancho: "140" },
+    { key: "numeroChapa", label: "Número de chapa", ancho: "160" },
+    { key: "controlLlaves", label: "Control de llaves", ancho: "160" },
+    { key: "estadoFisico", label: "Estado físico actual", ancho: "180" },
+    { key: "color", label: "Color", ancho: "140" },
+    { key: "dimensiones", label: "Dimensiones", ancho: "160" },
+    { key: "ubicacion", label: "Ubicación", ancho: "180" },
+    { key: "comentarios", label: "Comentarios", ancho: "220" },
+    { key: "observaciones", label: "Observaciones", ancho: "220" },
+  ],
+  vehiculos: [
+    { key: "index", label: "#", ancho: "80" },
+    { key: "ordenCompra", label: "Orden de Compra", ancho: "160" },
+    { key: "factura", label: "Factura", ancho: "160" },
+    { key: "proveedor", label: "Proveedor", ancho: "180" },
+    { key: "fechaIngreso", label: "Fecha Ingreso", ancho: "140" },
+    { key: "hojaNo", label: "Hoja No.", ancho: "100" },
+    { key: "fechaActualizacion", label: "Fecha Actualizacion", ancho: "140" },
+    { key: "asignaciones", label: "Asignado a", ancho: "220" },
+    { key: "codificacion", label: "Codificación", ancho: "180" },
+    { key: "categoria", label: "Categoría", ancho: "160" },
+    { key: "familia", label: "Familia", ancho: "180" },
+    { key: "estado", label: "Estado", ancho: "140" },
+    { key: "tipoEquipo", label: "Equipo", ancho: "140" },
+    { key: "marca", label: "Marca", ancho: "140" },
+    { key: "modelo", label: "Modelo", ancho: "140" },
+    { key: "placa", label: "Placa", ancho: "140" },
+    { key: "vin", label: "VIN / número de chasis", ancho: "180" },
+    { key: "numeroChasis", label: "Número de chasis", ancho: "180" },
+    { key: "modeloAnio", label: "Año / modelo", ancho: "140" },
+    { key: "colorVehiculo", label: "Color", ancho: "140" },
+    { key: "tipoCombustible", label: "Tipo de combustible", ancho: "170" },
+    { key: "kilometraje", label: "Kilometraje", ancho: "140" },
+    { key: "estadoFisico", label: "Estado físico", ancho: "160" },
+    { key: "catalogoVehiculo", label: "Catálogo", ancho: "150" },
+    { key: "polizaSeguro", label: "Póliza de seguro", ancho: "180" },
+    { key: "programacionMantenimiento", label: "Programación de mantenimiento", ancho: "220" },
+    { key: "alertasServicio", label: "Alertas de servicios", ancho: "220" },
+    { key: "historialReparaciones", label: "Historial de reparaciones", ancho: "220" },
+    { key: "reporteDanios", label: "Reporte de daños / incidencias", ancho: "220" },
+    { key: "bitacoraFallas", label: "Bitácora de fallas", ancho: "220" },
+    { key: "ubicacion", label: "Ubicación", ancho: "180" },
+    { key: "comentarios", label: "Comentarios", ancho: "220" },
+    { key: "observaciones", label: "Observaciones", ancho: "220" },
+  ],
+};
+
+const obtenerColumnasInventario = (categoria) => {
+  if (!categoria) return columnasGenericas;
+  const categoriaKey = normalizarCategoria(categoria);
+  return columnasPorCategoria[categoriaKey] || columnasGenericas;
+};
+
+const renderizarValorCelda = (equipo, key) => {
+  if (key === "index") return "-";
+
+  if (key === "asignaciones") {
+    return equipo.asignaciones?.length > 0 ? (
+      equipo.asignaciones.map((a, i) => (
+        <div key={i} className="mb-1">
+          <span className="text-blue-700 font-semibold">{a.codigoEmpleado}</span>{" "}
+          - {a.nombreEmpleado}
+          <div className="text-gray-500 italic text-[11px]">{a.puesto}</div>
+        </div>
+      ))
+    ) : (
+      <span className="text-gray-400 italic">Sin asignaciones</span>
+    );
+  }
+
+  if (key === "fechaIngreso" || key === "fechaActualizacion") {
+    const fecha = equipo[key];
+    return fecha ? new Date(fecha).toLocaleDateString("es-ES") : "Sin fecha";
+  }
+
+  if (key === "multimedia") {
+    return equipo.multimedia || "-";
+  }
+
+  if (key === "polizaSeguro") {
+    return equipo.polizaSeguro || "-";
+  }
+
+  if (key === "modeloAnio") {
+    return equipo.modeloAnio || "-";
+  }
+
+  if (key === "estadoFisico") {
+    return equipo.estadoFisico || equipo.estado || "-";
+  }
+
+  if (key === "ubicacion") {
+    return equipo.ubicacion || "-";
+  }
+
+  const valor = equipo[key];
+  if (valor === null || valor === undefined || valor === "") return "-";
+  return String(valor);
+};
+
 const ListaEquipos = () => {
   const [equipos, setEquipos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -84,7 +253,7 @@ const ListaEquipos = () => {
 
   const resultadosFiltrados = useMemo(() => {
     const equiposPorCategoria = categoriaUrl
-      ? equipos.filter((equipo) => equipo.categoria === categoriaUrl)
+      ? equipos.filter((equipo) => normalizarCategoria(equipo.categoria) === normalizarCategoria(categoriaUrl))
       : equipos;
     if (filtros.length === 0) return equiposPorCategoria;
 
@@ -127,6 +296,8 @@ const ListaEquipos = () => {
   const exportar = () => {
     exportarExcel(resultadosFiltrados, "Equipos_Filtrados");
   };
+
+  const columnasVisibles = obtenerColumnasInventario(categoriaUrl);
 
   return (
     <div className="h-full flex flex-col">
@@ -235,138 +406,83 @@ const ListaEquipos = () => {
           <div className="h-full rounded-2xl border border-slate-200 overflow-auto">
             <table className="min-w-[2200px] w-full text-xs border border-gray-300 border-collapse">
               <thead className="sticky top-0 z-10">
-                <tr className="text-center font-bold text-white">
-                  <th colSpan="5" className="px-3 py-2 border bg-blue-700">
-                    DATOS GENERALES
-                  </th>
-                  <th colSpan="3" className="px-3 py-2 border bg-blue-800">
-                    DATOS DE USUARIO
-                  </th>
-                  <th colSpan="10" className="px-3 py-2 border bg-blue-900">
-                    DATOS DEL EQUIPO
-                  </th>
-                  <th colSpan="1" className="px-3 py-2 border bg-blue-600">
-                    UBICACION DEL EQUIPO
-                  </th>
-                  <th colSpan="2" className="px-3 py-2 border bg-blue-800">
-                    INFORMACION DE EQUIPO
-                  </th>
-                </tr>
+                {categoriaUrl ? (
+                  <tr className="text-center text-white font-semibold">
+                    {columnasVisibles.map((columna) => (
+                      <th
+                        key={columna.key}
+                        className="px-3 py-2 border bg-blue-700 min-w-[120px]"
+                        style={{ minWidth: `${Math.max(Number(columna.ancho) || 120, 100)}px` }}
+                      >
+                        {columna.label}
+                      </th>
+                    ))}
+                  </tr>
+                ) : (
+                  <>
+                    <tr className="text-center font-bold text-white">
+                      <th colSpan="5" className="px-3 py-2 border bg-blue-700">
+                        DATOS GENERALES
+                      </th>
+                      <th colSpan="3" className="px-3 py-2 border bg-blue-800">
+                        DATOS DE USUARIO
+                      </th>
+                      <th colSpan="10" className="px-3 py-2 border bg-blue-900">
+                        DATOS DEL EQUIPO
+                      </th>
+                      <th colSpan="1" className="px-3 py-2 border bg-blue-600">
+                        UBICACION DEL EQUIPO
+                      </th>
+                      <th colSpan="2" className="px-3 py-2 border bg-blue-800">
+                        INFORMACION DE EQUIPO
+                      </th>
+                    </tr>
 
-                <tr className="text-center text-white font-semibold">
-                  <th className="px-3 py-2 border bg-blue-700 min-w-[80px]">#</th>
-                  <th className="px-3 py-2 border bg-blue-700 min-w-[160px]">Orden de Compra</th>
-                  <th className="px-3 py-2 border bg-blue-700 min-w-[160px]">Factura</th>
-                  <th className="px-3 py-2 border bg-blue-700 min-w-[180px]">Proveedor</th>
-                  <th className="px-3 py-2 border bg-blue-700 min-w-[140px]">Fecha Ingreso</th>
-
-                  <th className="px-3 py-2 border bg-blue-800 min-w-[100px]">Hoja No.</th>
-                  <th className="px-3 py-2 border bg-blue-800 min-w-[160px]">Fecha Actualizacion</th>
-                  <th className="px-3 py-2 border bg-blue-800 min-w-[220px]">Asignado a</th>
-
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[180px]">Codificación</th>
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[160px]">Categoría</th>
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[180px]">Familia</th>
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[140px]">Estado</th>
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[140px]">Equipo</th>
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[140px]">Marca</th>
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[140px]">Modelo</th>
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[160px]">Serie</th>
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[180px]">Responsable Anterior</th>
-                  <th className="px-3 py-2 border bg-blue-900 min-w-[120px]">Extensión</th>
-
-                  <th className="px-3 py-2 border bg-blue-600 min-w-[180px]">Ubicación</th>
-
-                  <th className="px-3 py-2 border bg-blue-800 min-w-[220px]">Comentarios</th>
-                  <th className="px-3 py-2 border bg-blue-800 min-w-[220px]">Observaciones</th>
-                </tr>
+                    <tr className="text-center text-white font-semibold">
+                      {columnasGenericas.map((columna) => (
+                        <th
+                          key={columna.key}
+                          className="px-3 py-2 border bg-blue-700 min-w-[120px]"
+                          style={{ minWidth: `${Math.max(Number(columna.ancho) || 120, 100)}px` }}
+                        >
+                          {columna.label}
+                        </th>
+                      ))}
+                    </tr>
+                  </>
+                )}
               </thead>
 
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan="21" className="text-center p-6 text-gray-500">
+                    <td colSpan={columnasVisibles.length || 1} className="text-center p-6 text-gray-500">
                       Cargando equipos...
                     </td>
                   </tr>
                 ) : equiposVisibles.length > 0 ? (
                   equiposVisibles.map((equipo, index) => (
                     <React.Fragment key={equipo.id ?? index}>
-                    {agruparFamilia && (index === 0 || equiposVisibles[index - 1].familia !== equipo.familia || equiposVisibles[index - 1].categoria !== equipo.categoria) && (
-                      <tr className="bg-slate-100 text-left"><td colSpan="21" className="px-3 py-2 border font-bold text-slate-700">{equipo.categoria || "Sin categoría"} / {equipo.familia || "Sin familia"}</td></tr>
-                    )}
-                    <tr className="text-center even:bg-gray-50 hover:bg-blue-50">
-                      <td className="px-3 py-2 border min-w-[80px]">{index + 1}</td>
+                      {agruparFamilia && !categoriaUrl && (index === 0 || equiposVisibles[index - 1].familia !== equipo.familia || equiposVisibles[index - 1].categoria !== equipo.categoria) && (
+                        <tr className="bg-slate-100 text-left"><td colSpan={columnasGenericas.length} className="px-3 py-2 border font-bold text-slate-700">{equipo.categoria || "Sin categoría"} / {equipo.familia || "Sin familia"}</td></tr>
+                      )}
 
-                      <td className="px-3 py-2 border min-w-[160px] break-words">
-                        {equipo.ordenCompra || "-"}
-                      </td>
-                      <td className="px-3 py-2 border min-w-[160px] break-words">
-                        {equipo.factura || "-"}
-                      </td>
-                      <td className="px-3 py-2 border min-w-[180px] break-words">
-                        {equipo.proveedor || "-"}
-                      </td>
-
-                      <td className="px-3 py-2 border min-w-[140px]">
-                        {equipo.fechaIngreso
-                          ? new Date(equipo.fechaIngreso).toLocaleDateString("es-ES")
-                          : "Sin fecha"}
-                      </td>
-
-                      <td className="px-3 py-2 border text-red-600 font-semibold min-w-[100px]">
-                        {equipo.hojaNo || "Sin asignar"}
-                      </td>
-
-                      <td className="px-3 py-2 border min-w-[140px]">
-                        {equipo.fechaActualizacion
-                          ? new Date(equipo.fechaActualizacion).toLocaleDateString("es-ES")
-                          : "Sin fecha"}
-                      </td>
-
-                      <td className="px-3 py-2 border min-w-[220px] text-left">
-                        {equipo.asignaciones?.length > 0 ? (
-                          equipo.asignaciones.map((a, i) => (
-                            <div key={i} className="mb-1">
-                              <span className="text-blue-700 font-semibold">{a.codigoEmpleado}</span>{" "}
-                              - {a.nombreEmpleado}
-                              <div className="text-gray-500 italic text-[11px]">{a.puesto}</div>
-                            </div>
-                          ))
-                        ) : (
-                          <span className="text-gray-400 italic">Sin asignaciones</span>
-                        )}
-                      </td>
-
-                      <td className="px-3 py-2 border font-bold text-blue-800 min-w-[180px]">
-                        {equipo.codificacion || "-"}
-                      </td>
-
-                      <td className="px-3 py-2 border min-w-[160px]">{equipo.categoria || "-"}</td>
-                      <td className="px-3 py-2 border min-w-[180px]">{equipo.familia || "-"}</td>
-                      <td className="px-3 py-2 border min-w-[140px]">{equipo.estado || "-"}</td>
-                      <td className="px-3 py-2 border min-w-[140px]">{equipo.tipoEquipo || "-"}</td>
-                      <td className="px-3 py-2 border min-w-[140px]">{equipo.marca || "-"}</td>
-                      <td className="px-3 py-2 border min-w-[140px]">{equipo.modelo || "-"}</td>
-                      <td className="px-3 py-2 border min-w-[160px]">{equipo.serie || "-"}</td>
-                      <td className="px-3 py-2 border min-w-[180px]">{equipo.responsableAnterior || "-"}</td>
-                      <td className="px-3 py-2 border min-w-[120px]">{equipo.extension || "-"}</td>
-
-                      <td className="px-3 py-2 border min-w-[180px]">{equipo.ubicacion || "-"}</td>
-
-                      <td className="px-3 py-2 border min-w-[220px] break-words text-left">
-                        {equipo.comentarios || "-"}
-                      </td>
-
-                      <td className="px-3 py-2 border min-w-[220px] break-words text-left">
-                        {equipo.observaciones || "-"}
-                      </td>
-                    </tr>
+                      <tr className="text-center even:bg-gray-50 hover:bg-blue-50">
+                        {columnasVisibles.map((columna) => (
+                          <td
+                            key={`${equipo.id ?? index}-${columna.key}`}
+                            className={`px-3 py-2 border ${columna.key === "asignaciones" || columna.key === "comentarios" || columna.key === "observaciones" || columna.key === "descripcionBien" || columna.key === "direccion" || columna.key === "fichaTecnica" || columna.key === "multimedia" || columna.key === "programacionMantenimiento" || columna.key === "alertasServicio" || columna.key === "historialReparaciones" || columna.key === "reporteDanios" || columna.key === "bitacoraFallas" ? "break-words text-left" : ""} ${columna.key === "hojaNo" ? "text-red-600 font-semibold" : ""}`}
+                            style={{ minWidth: `${Math.max(Number(columna.ancho) || 120, 100)}px` }}
+                          >
+                            {columna.key === "index" ? index + 1 : renderizarValorCelda(equipo, columna.key)}
+                          </td>
+                        ))}
+                      </tr>
                     </React.Fragment>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="21" className="text-center p-6 text-gray-500">
+                    <td colSpan={columnasVisibles.length || 1} className="text-center p-6 text-gray-500">
                       No se encontraron equipos.
                     </td>
                   </tr>
