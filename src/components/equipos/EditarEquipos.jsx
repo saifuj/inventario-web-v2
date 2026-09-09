@@ -273,6 +273,33 @@ const EditarEquipo = () => {
                   </div>
                 </div>
               </section>
+
+              {equipo.categoria === "Vehículos" && (
+                <section className="rounded-2xl border border-slate-200 overflow-hidden">
+                  <div className="px-5 py-4 bg-slate-50 border-b border-slate-200">
+                    <h3 className="text-sm font-bold text-slate-900 tracking-wide">
+                      CONFIGURACIÓN DE VEHÍCULOS
+                    </h3>
+                  </div>
+                  <div className="p-5 grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div className="flex flex-col"><label className="text-xs font-semibold text-slate-600">VIN / número de chasis</label><input name="vin" value={equipo.vin || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="flex flex-col"><label className="text-xs font-semibold text-slate-600">Número de chasis</label><input name="numeroChasis" value={equipo.numeroChasis || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="flex flex-col"><label className="text-xs font-semibold text-slate-600">Año / modelo</label><input name="modeloAnio" type="number" min="1900" max="2100" value={equipo.modeloAnio || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="flex flex-col"><label className="text-xs font-semibold text-slate-600">Color</label><input name="colorVehiculo" value={equipo.colorVehiculo || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="flex flex-col"><label className="text-xs font-semibold text-slate-600">Tipo de combustible</label><input name="tipoCombustible" value={equipo.tipoCombustible || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="flex flex-col"><label className="text-xs font-semibold text-slate-600">Kilometraje</label><input name="kilometraje" type="number" min="0" value={equipo.kilometraje || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="flex flex-col"><label className="text-xs font-semibold text-slate-600">Estado físico</label><select name="estadoFisico" value={equipo.estadoFisico || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800"><option value="">-- Seleccione --</option><option value="Excelente">Excelente</option><option value="Bueno">Bueno</option><option value="Regular">Regular</option><option value="Malo">Malo</option><option value="En reparación">En reparación</option></select></div>
+                    <div className="flex flex-col"><label className="text-xs font-semibold text-slate-600">Catálogo</label><input name="catalogoVehiculo" value={equipo.catalogoVehiculo || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="flex flex-col"><label className="text-xs font-semibold text-slate-600">Póliza de seguro</label><input name="polizaSeguro" value={equipo.polizaSeguro || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="md:col-span-3 flex flex-col"><label className="text-xs font-semibold text-slate-600">Programación de mantenimiento</label><input name="programacionMantenimiento" value={equipo.programacionMantenimiento || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="md:col-span-3 flex flex-col"><label className="text-xs font-semibold text-slate-600">Alertas de servicios</label><input name="alertasServicio" value={equipo.alertasServicio || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="md:col-span-3 flex flex-col"><label className="text-xs font-semibold text-slate-600">Historial de reparaciones</label><textarea name="historialReparaciones" rows="2" value={equipo.historialReparaciones || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="md:col-span-3 flex flex-col"><label className="text-xs font-semibold text-slate-600">Reporte de daños / incidencias</label><textarea name="reporteDanios" rows="2" value={equipo.reporteDanios || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                    <div className="md:col-span-3 flex flex-col"><label className="text-xs font-semibold text-slate-600">Bitácora de fallas</label><textarea name="bitacoraFallas" rows="2" value={equipo.bitacoraFallas || ""} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-800" /></div>
+                  </div>
+                </section>
+              )}
+
               <div className="sticky bottom-0 bg-white border-t border-slate-100 pt-4">
                 <div className="flex justify-end gap-3">
                   <button

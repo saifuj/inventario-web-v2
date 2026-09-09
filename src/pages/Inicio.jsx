@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FaLaptop,
-  FaUserCheck,
   FaClipboardList,
   FaFilePdf,
   FaExchangeAlt,
@@ -37,7 +36,6 @@ const Inicio = () => {
   const quick = useMemo(() => {
     return [
       { label: "Buscar activos", to: "/equipos/inventario", icon: <FaSearch /> },
-      { label: "Ver asignaciones", to: "/asignaciones/lista", icon: <FaUserCheck /> },
       { label: "Hojas", to: "/formatos/listahojasresponsabilidad", icon: <FaFilePdf /> },
       { label: "Traslados", to: "/formatos/traslados/lista", icon: <FaExchangeAlt /> },
     ];
@@ -50,13 +48,6 @@ const Inicio = () => {
         desc: "Configura y agrega un activo al inventario.",
         icon: <FaPlus />,
         to: "/equipos/crear",
-        tag: "Admin",
-      },
-      {
-        title: "Asignar activo",
-        desc: "Asigna activos a colaboradores.",
-        icon: <FaUserCheck />,
-        to: "/asignaciones/crear",
         tag: "Admin",
       },
       {
@@ -83,13 +74,6 @@ const Inicio = () => {
         desc: "Configura y agrega un activo al inventario.",
         icon: <FaPlus />,
         to: "/equipos/crear",
-        tag: "Admin",
-      },
-      {
-        title: "Asignar activo",
-        desc: "Asigna activos a colaboradores.",
-        icon: <FaUserCheck />,
-        to: "/asignaciones/crear",
         tag: "Admin",
       },
       {
@@ -165,12 +149,6 @@ const Inicio = () => {
                   className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition"
                 >
                   Ver inventario
-                </button>
-                <button
-                  onClick={() => navigate("/asignaciones/lista")}
-                  className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-3 rounded-xl font-semibold transition border border-gray-200"
-                >
-                  Ver asignaciones
                 </button>
               </div>
             </div>
@@ -344,12 +322,6 @@ const Inicio = () => {
                     className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl font-semibold transition"
                   >
                     Ingresar activo
-                  </button>
-                  <button
-                    onClick={() => navigate("/asignaciones/crear")}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl font-semibold transition"
-                  >
-                    Asignar equipo
                   </button>
                   <button
                     onClick={() => navigate("/formatos/listahojasresponsabilidad")}

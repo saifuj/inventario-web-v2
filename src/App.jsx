@@ -9,11 +9,6 @@ import CrearEquipo from "./components/equipos/Crearquipos";
 import ListaEquipos from "./components/equipos/ListaEquipos";
 import EditarEquipo from "./components/equipos/EditarEquipos";
 import EliminarEquipos from "./components/equipos/EliminarEquipos";
-import CrearAsignacion from "./components/asignaciones/CrearAsignacion";
-import ListaAsignaciones from "./components/asignaciones/ListaAsignacion";
-import EliminarAsignacion from "./components/asignaciones/EliminarAsignacion";
-import CrearAsignacionComunal from "./components/asignaciones/CrearAsignacionComunal";
-import ListaAsignacionComunal from "./components/asignaciones/ListaAsignacionComunal";
 import CrearSolicitud from "./components/solicitudes/CrearSolicitud";
 import ListaSolicitud from "./components/solicitudes/ListaSolicitud";
 import EliminarSolicitud from "./components/solicitudes/EliminarSolicitud";
@@ -34,9 +29,6 @@ import EliminarSuministros from "./components/suministros/EliminarMovimientos";
 import CrearTrasladoRetorno from "./components/formatos/TrasladosRetorno/TrasladosRetorno";
 import TrasladosRetornoLista from "./components/formatos/TrasladosRetorno/TrasladosRetornoLista";
 import ProtectedRoute from "./components/ProtectedRout";
-import ListaEmpleadosExternos from "./components/empleadosExternos/ListaEmpleadosExternos";
-import CrearEmpleadoExterno from "./components/empleadosExternos/CrearEmpleadoExterno";
-import EditarEmpleadoExterno from "./components/empleadosExternos/EditarEmpleadoExterno";
 
 function RequireAuth({ children }) {
   const isAuthenticated = useIsAuthenticated();
@@ -77,12 +69,6 @@ function AppRoutes() {
           <Route path="/equipos/inventario" element={<ListaEquipos />} />
           <Route path="/equipos/editar" element={<EditarEquipo />} />
           <Route path="/equipos/eliminar" element={<EliminarEquipos />} />
-          {/* ASIGNACIONES */}
-          <Route path="/asignaciones/crear" element={<CrearAsignacion />} />
-          <Route path="asignaciones/lista" element={<ListaAsignaciones />} />
-          <Route path="asignaciones/eliminar" element={<EliminarAsignacion />} />
-          <Route path="/asignaciones/comunal/crear" element={<CrearAsignacionComunal />} />
-          <Route path="/asignaciones/comunal/lista" element={<ListaAsignacionComunal />} />
           {/* SOLICITUDES */}
           <Route path="/solicitudes/crear" element={<CrearSolicitud />} />
           <Route path="/solicitudes/lista" element={<ListaSolicitud />} />
@@ -104,10 +90,6 @@ function AppRoutes() {
           {/* FORMATOS/TRASLADOSRETORNO */}
           <Route path="/formatos/trasladosRetorno/crear" element={<CrearTrasladoRetorno />} />
           <Route path="/formatos/trasladosRetorno/lista" element={<TrasladosRetornoLista />} />
-          {/* EMPLEADOS EXTERNOS */}
-          <Route path="/externos/lista" element={<ListaEmpleadosExternos />} />
-          <Route path="/externos/crear" element={<CrearEmpleadoExterno />} />
-          <Route path="/externos/editar/:id" element={<EditarEmpleadoExterno />} />
           {/* SUMINISTROS */}
           <Route path="/suministros" element={<Suministros />} />
           <Route path="/suministros/inventario" element={<SuministrosInventario />} />

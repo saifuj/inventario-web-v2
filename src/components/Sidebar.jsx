@@ -14,7 +14,6 @@ import {
   FaUserCheck,
   FaBoxOpen,
   FaPlus,
-  FaIdCard,
   FaTimes,
   FaMapMarkerAlt,
   FaBuilding,
@@ -53,14 +52,12 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
   const location = useLocation();
   const [activosOpen, setActivosOpen] = useState(false);
   const [categoriaActiva, setCategoriaActiva] = useState("");
-  const [asignacionesOpen, setAsignacionesOpen] = useState(false);
   const [mantenimientosOpen, setMantenimientosOpen] = useState(false);
   const [formatosOpen, setFormatosOpen] = useState(false);
   const [modalHojaOpen, setModalHojaOpen] = useState(false);
   const [modalSolvenciaOpen, setModalSolvenciaOpen] = useState(false);
   const [modalTrasladoOpen, setModalTrasladoOpen] = useState(false);
   const [suministrosOpen, setSuministrosOpen] = useState(false);
-  const [externosOpen, setExternosOpen] = useState(false);
   const [modalBajasActivoOpen, setModalBajasActivoOpen] = useState(false);
   const [modalTrasladoRetornoOpen, setModalTrasladoRetornoOpen] = useState(false);
   const [rol, setRol] = useState(null);
@@ -250,55 +247,6 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
               )}
             </div>
           </div>
-
-          <div>
-            <button onClick={() => setAsignacionesOpen(!asignacionesOpen)} className={categoryButtonClass}>
-              <span className="flex items-center gap-3">
-                <FaUserCheck /> Asignaciones
-              </span>
-              {asignacionesOpen ? <FaChevronUp className="text-xs" /> : <FaChevronDown className="text-xs" />}
-            </button>
-            <div className={`ml-6 mt-1 flex flex-col gap-2 overflow-hidden transition-all duration-500 ${asignacionesOpen ? "max-h-52" : "max-h-0"}`}>
-              {rol === "Administrador" && (
-                <>
-                  <Link to="/asignaciones/crear" className={subLinkClass(isActive("/asignaciones/crear"))}>
-                    <FaUpload /> Asignar
-                  </Link>
-                  <Link to="/asignaciones/eliminar" className={subLinkClass(isActive("/asignaciones/eliminar"))}>
-                    <FaTrash /> Desasignar
-                  </Link>
-                  <Link to="/asignaciones/comunal/crear" className={subLinkClass(isActive("/asignaciones/comunal/crear"))}>
-                    <FaMapMarkerAlt /> Asignación comunal
-                  </Link>
-                  <Link to="/asignaciones/comunal/lista" className={subLinkClass(isActive("/asignaciones/comunal/lista"))}>
-                    <FaClipboardList /> Historial comunal
-                  </Link>
-                </>
-              )}
-              <Link to="/asignaciones/lista" className={subLinkClass(isActive("/asignaciones/lista"))}>
-                <FaClipboardList /> Historial
-              </Link>
-            </div>
-          </div>
-
-          {rol === "Administrador" && (
-            <div>
-              <button onClick={() => setExternosOpen(!externosOpen)} className={categoryButtonClass}>
-                <span className="flex items-center gap-3">
-                  <FaIdCard /> Externos
-                </span>
-                {externosOpen ? <FaChevronUp className="text-xs" /> : <FaChevronDown className="text-xs" />}
-              </button>
-              <div className={`ml-6 mt-1 flex flex-col gap-2 overflow-hidden transition-all duration-500 ${externosOpen ? "max-h-32" : "max-h-0"}`}>
-                <Link to="/externos/crear" className={subLinkClass(isActive("/externos/crear"))}>
-                  <FaPlus /> Registrar
-                </Link>
-                <Link to="/externos/lista" className={subLinkClass(isActive("/externos/lista"))}>
-                  <FaClipboardList /> Lista
-                </Link>
-              </div>
-            </div>
-          )}
 
           <div>
             <button onClick={() => setMantenimientosOpen(!mantenimientosOpen)} className={categoryButtonClass}>

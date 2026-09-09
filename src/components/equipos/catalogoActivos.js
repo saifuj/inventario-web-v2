@@ -18,6 +18,7 @@ export const CATEGORIAS_ACTIVOS = [
     value: "Vehículos",
     label: "Vehículos",
     familias: ["Automóvil", "Motocicleta", "Camión", "Montacargas", "Otro vehículo"],
+    descripcion: "Vehículos administrados por IT. Incluye registro técnico, control de kilometraje, seguros, mantenimientos y bitácora de fallas.",
   },
   {
     value: "Otros activos",

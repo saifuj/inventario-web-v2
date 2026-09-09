@@ -39,11 +39,22 @@ const CrearEquipo = () => {
     dimensiones: "",
     placa: "",
     vin: "",
+    numeroChasis: "",
+    modeloAnio: "",
     kilometraje: "",
     tipoCombustible: "",
+    categoriaVehiculo: "",
+    colorVehiculo: "",
+    estadoFisico: "",
+    historialReparaciones: "",
+    programacionMantenimiento: "",
+    alertasServicio: "",
+    bitacoraFallas: "",
+    reporteDanios: "",
+    polizaSeguro: "",
+    catalogoVehiculo: "",
     caracteristicas: "",
     multimedia: [],
-    polizaSeguro: "",
   });
 
   const [ubicaciones, setUbicaciones] = useState([]);
@@ -266,9 +277,20 @@ const CrearEquipo = () => {
                 </>}
                 {form.categoria === "Vehículos" && <>
                   <div className="flex flex-col"><label htmlFor="placa" className="text-xs font-semibold text-slate-600">Placa</label><input id="placa" name="placa" value={form.placa} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" /></div>
-                  <div className="flex flex-col"><label htmlFor="vin" className="text-xs font-semibold text-slate-600">VIN / chasis</label><input id="vin" name="vin" value={form.vin} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" /></div>
-                  <div className="flex flex-col"><label htmlFor="kilometraje" className="text-xs font-semibold text-slate-600">Kilometraje</label><input id="kilometraje" name="kilometraje" value={form.kilometraje} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" /></div>
+                  <div className="flex flex-col"><label htmlFor="vin" className="text-xs font-semibold text-slate-600">VIN / número de chasis</label><input id="vin" name="vin" value={form.vin} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="VIN" /></div>
+                  <div className="flex flex-col"><label htmlFor="numeroChasis" className="text-xs font-semibold text-slate-600">Número de chasis</label><input id="numeroChasis" name="numeroChasis" value={form.numeroChasis} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="Número de chasis" /></div>
+                  <div className="flex flex-col"><label htmlFor="modeloAnio" className="text-xs font-semibold text-slate-600">Modelo (año)</label><input id="modeloAnio" name="modeloAnio" type="number" min="1900" max="2100" value={form.modeloAnio} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="2024" /></div>
+                  <div className="flex flex-col"><label htmlFor="colorVehiculo" className="text-xs font-semibold text-slate-600">Color</label><input id="colorVehiculo" name="colorVehiculo" value={form.colorVehiculo} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" /></div>
                   <div className="flex flex-col"><label htmlFor="tipoCombustible" className="text-xs font-semibold text-slate-600">Tipo de combustible</label><input id="tipoCombustible" name="tipoCombustible" value={form.tipoCombustible} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" /></div>
+                  <div className="flex flex-col"><label htmlFor="kilometraje" className="text-xs font-semibold text-slate-600">Kilometraje</label><input id="kilometraje" name="kilometraje" type="number" min="0" value={form.kilometraje} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" /></div>
+                  <div className="flex flex-col"><label htmlFor="estadoFisico" className="text-xs font-semibold text-slate-600">Estado físico</label><select id="estadoFisico" name="estadoFisico" value={form.estadoFisico} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm"><option value="">-- Seleccione --</option><option value="Excelente">Excelente</option><option value="Bueno">Bueno</option><option value="Regular">Regular</option><option value="Malo">Malo</option><option value="En reparación">En reparación</option></select></div>
+                  <div className="flex flex-col"><label htmlFor="catalogoVehiculo" className="text-xs font-semibold text-slate-600">Catálogo del vehículo</label><input id="catalogoVehiculo" name="catalogoVehiculo" value={form.catalogoVehiculo} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="Ej. SUV / Pickup / Sedan" /></div>
+                  <div className="flex flex-col md:col-span-2"><label htmlFor="programacionMantenimiento" className="text-xs font-semibold text-slate-600">Programación de mantenimiento</label><input id="programacionMantenimiento" name="programacionMantenimiento" value={form.programacionMantenimiento} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="Próximo servicio, fechas, odómetro" /></div>
+                  <div className="flex flex-col md:col-span-2"><label htmlFor="alertasServicio" className="text-xs font-semibold text-slate-600">Alertas de servicios</label><input id="alertasServicio" name="alertasServicio" value={form.alertasServicio} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="Alertas y vencimientos" /></div>
+                  <div className="flex flex-col md:col-span-2"><label htmlFor="historialReparaciones" className="text-xs font-semibold text-slate-600">Historial de reparaciones</label><textarea id="historialReparaciones" name="historialReparaciones" rows="2" value={form.historialReparaciones} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="Detalle de reparaciones y mantenimientos previos" /></div>
+                  <div className="flex flex-col md:col-span-2"><label htmlFor="reporteDanios" className="text-xs font-semibold text-slate-600">Reporte de daños o incidencias</label><textarea id="reporteDanios" name="reporteDanios" rows="2" value={form.reporteDanios} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="Daños, incidencias o observaciones" /></div>
+                  <div className="flex flex-col md:col-span-2"><label htmlFor="bitacoraFallas" className="text-xs font-semibold text-slate-600">Bitácora de fallas</label><textarea id="bitacoraFallas" name="bitacoraFallas" rows="2" value={form.bitacoraFallas} onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="Registro de fallas o incidentes" /></div>
+                  <div className="flex flex-col"><label htmlFor="polizaSeguro" className="text-xs font-semibold text-slate-600">Póliza de seguro</label><input id="polizaSeguro" name="polizaSeguro" type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={handleChange} className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm" /></div>
                 </>}
                 {(form.categoria === "Equipo de cómputo" || form.categoria === "Otros activos") && <div className="flex flex-col md:col-span-3"><label htmlFor="caracteristicas" className="text-xs font-semibold text-slate-600">Características / ficha técnica</label><textarea id="caracteristicas" name="caracteristicas" value={form.caracteristicas} onChange={handleChange} rows="3" className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm" /></div>}
               </div>
