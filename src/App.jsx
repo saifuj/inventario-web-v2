@@ -66,6 +66,7 @@ function AppRoutes() {
           <Route path="/inicio" element={<Inicio />} />
           {/* EQUIPOS */}
           <Route path="/equipos/crear" element={<CrearEquipo />} />
+          <Route path="/equipos/inventario/:categoria" element={<ListaEquipos />} />
           <Route path="/equipos/inventario" element={<ListaEquipos />} />
           <Route path="/equipos/editar" element={<EditarEquipo />} />
           <Route path="/equipos/eliminar" element={<EliminarEquipos />} />

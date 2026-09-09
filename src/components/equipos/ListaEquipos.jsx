@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import EquiposService from "../../services/EquiposServices";
 import { exportarExcel } from "../../services/ExportExcel";
 import { CATEGORIAS_ACTIVOS } from "./catalogoActivos";
@@ -64,6 +65,27 @@ const normalizarCategoria = (valor) =>
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim();
+
+const slugifyCategoria = (valor = "") =>
+  String(valor)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const resolverCategoriaDesdeRuta = (valor = "") => {
+  if (!valor) return "";
+
+  const texto = decodeURIComponent(valor).trim();
+  const categoriaCoincidente = CATEGORIAS_ACTIVOS.find(
+    ({ value, label }) =>
+      slugifyCategoria(value) === slugifyCategoria(texto) ||
+      slugifyCategoria(label) === slugifyCategoria(texto)
+  );
+
+  return categoriaCoincidente?.value || texto;
+};
 
 const columnasPorCategoria = {
   inmuebles: [
@@ -230,11 +252,14 @@ const renderizarValorCelda = (equipo, key) => {
 };
 
 const ListaEquipos = () => {
+  const { categoria: categoriaRuta } = useParams();
+  const location = useLocation();
   const [equipos, setEquipos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filtros, setFiltros] = useState([]);
   const [agruparFamilia, setAgruparFamilia] = useState(true);
-  const categoriaUrl = new URLSearchParams(window.location.search).get("categoria") || "";
+  const categoriaQuery = new URLSearchParams(location.search).get("categoria") || "";
+  const categoriaUrl = resolverCategoriaDesdeRuta(categoriaRuta || categoriaQuery) || "";
 
   useEffect(() => {
     const cargarEquipos = async () => {
