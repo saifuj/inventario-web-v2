@@ -12,6 +12,8 @@ export {
   default as ListaInmuebles,
   default as EditarInmueble,
   default as EliminarInmuebles,
+  IngresarInmueble,
+  InventarioInmuebles,
 } from "./inmuebles";
 
 export {
@@ -19,6 +21,8 @@ export {
   default as ListaMobiliarioEquipo,
   default as EditarMobiliarioEquipo,
   default as EliminarMobiliarioEquipo,
+  IngresarMobiliarioEquipo,
+  InventarioMobiliarioEquipo,
 } from "./mobiliario-y-equipo";
 
 export {
@@ -26,6 +30,8 @@ export {
   default as ListaEquipoComputo,
   default as EditarEquipoComputo,
   default as EliminarEquipoComputo,
+  IngresarEquipoComputo,
+  InventarioEquipoComputo,
 } from "./equipo-de-computo";
 
 export {
@@ -33,6 +39,8 @@ export {
   default as ListaVehiculos,
   default as EditarVehiculo,
   default as EliminarVehiculos,
+  IngresarVehiculo,
+  InventarioVehiculos,
   CATEGORIAS_ACTIVOS as CATEGORIAS_VEHICULOS,
   obtenerCategoria as obtenerCategoriaVehiculo,
 } from "./vehiculos";
@@ -42,4 +50,6 @@ export {
   default as ListaOtrosActivos,
   default as EditarOtrosActivos,
   default as EliminarOtrosActivos,
+  IngresarOtrosActivos,
+  InventarioOtrosActivos,
 } from "./otros-activos";

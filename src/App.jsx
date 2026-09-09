@@ -11,6 +11,26 @@ import {
   ListaEquipos,
   EditarEquipo,
   EliminarEquipos,
+  IngresarInmueble,
+  InventarioInmuebles,
+  EditarInmueble,
+  EliminarInmuebles,
+  IngresarMobiliarioEquipo,
+  InventarioMobiliarioEquipo,
+  EditarMobiliarioEquipo,
+  EliminarMobiliarioEquipo,
+  IngresarEquipoComputo,
+  InventarioEquipoComputo,
+  EditarEquipoComputo,
+  EliminarEquipoComputo,
+  IngresarVehiculo,
+  InventarioVehiculos,
+  EditarVehiculo,
+  EliminarVehiculos,
+  IngresarOtrosActivos,
+  InventarioOtrosActivos,
+  EditarOtrosActivos,
+  EliminarOtrosActivos,
 } from "./modules/activos";
 import {
   CrearSolicitud,
@@ -79,6 +99,31 @@ function AppRoutes() {
           <Route path="/equipos/inventario" element={<ListaEquipos />} />
           <Route path="/equipos/editar" element={<EditarEquipo />} />
           <Route path="/equipos/eliminar" element={<EliminarEquipos />} />
+
+          <Route path="/activos/inmuebles/ingresar" element={<IngresarInmueble />} />
+          <Route path="/activos/inmuebles/inventario" element={<InventarioInmuebles />} />
+          <Route path="/activos/inmuebles/editar" element={<EditarInmueble />} />
+          <Route path="/activos/inmuebles/eliminar" element={<EliminarInmuebles />} />
+
+          <Route path="/activos/mobiliario-y-equipo/ingresar" element={<IngresarMobiliarioEquipo />} />
+          <Route path="/activos/mobiliario-y-equipo/inventario" element={<InventarioMobiliarioEquipo />} />
+          <Route path="/activos/mobiliario-y-equipo/editar" element={<EditarMobiliarioEquipo />} />
+          <Route path="/activos/mobiliario-y-equipo/eliminar" element={<EliminarMobiliarioEquipo />} />
+
+          <Route path="/activos/equipo-de-computo/ingresar" element={<IngresarEquipoComputo />} />
+          <Route path="/activos/equipo-de-computo/inventario" element={<InventarioEquipoComputo />} />
+          <Route path="/activos/equipo-de-computo/editar" element={<EditarEquipoComputo />} />
+          <Route path="/activos/equipo-de-computo/eliminar" element={<EliminarEquipoComputo />} />
+
+          <Route path="/activos/vehiculos/ingresar" element={<IngresarVehiculo />} />
+          <Route path="/activos/vehiculos/inventario" element={<InventarioVehiculos />} />
+          <Route path="/activos/vehiculos/editar" element={<EditarVehiculo />} />
+          <Route path="/activos/vehiculos/eliminar" element={<EliminarVehiculos />} />
+
+          <Route path="/activos/otros-activos/ingresar" element={<IngresarOtrosActivos />} />
+          <Route path="/activos/otros-activos/inventario" element={<InventarioOtrosActivos />} />
+          <Route path="/activos/otros-activos/editar" element={<EditarOtrosActivos />} />
+          <Route path="/activos/otros-activos/eliminar" element={<EliminarOtrosActivos />} />
           {/* SOLICITUDES */}
           <Route path="/solicitudes/crear" element={<CrearSolicitud />} />
           <Route path="/solicitudes/lista" element={<ListaSolicitud />} />

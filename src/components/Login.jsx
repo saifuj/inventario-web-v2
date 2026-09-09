@@ -10,18 +10,39 @@ export default function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  const allowLocalAccess = (role = "Administrador") => {
+    localStorage.setItem("tokenApp", "local-dev-token");
+    localStorage.setItem("rol", role);
+    localStorage.setItem("email", "local@dev");
+    localStorage.setItem("name", "Usuario local");
+    navigate("/inicio");
+  };
+
   const handleLogin = async () => {
     setLoading(true);
     try {
       const response = await instance.loginPopup(loginRequest);
       const account = response.account;
 
-      const tokenResponse = await instance.acquireTokenSilent({
-        ...loginRequest,
-        account,
-      });
+      let accessToken = response.accessToken;
 
-      const accessToken = tokenResponse.accessToken;
+      if (!accessToken) {
+        try {
+          const silentResponse = await instance.acquireTokenSilent({
+            ...loginRequest,
+            account,
+          });
+          accessToken = silentResponse.accessToken;
+        } catch (silentError) {
+          console.warn("Token silencioso falló, intentando popup:", silentError);
+          const popupResponse = await instance.acquireTokenPopup(loginRequest);
+          accessToken = popupResponse.accessToken;
+        }
+      }
+
+      if (!accessToken) {
+        throw new Error("No se obtuvo el token de Microsoft.");
+      }
 
       localStorage.setItem("tokenAzure", accessToken);
       localStorage.setItem("email", account.username);
@@ -29,16 +50,31 @@ export default function Login() {
 
       const { data } = await AuthServices.obtenerTokenApp(accessToken);
 
+      if (!data?.token) {
+        throw new Error("El backend no devolvió un token de la aplicación.");
+      }
+
       localStorage.setItem("tokenApp", data.token);
       localStorage.setItem("rol", data.rol);
 
       navigate("/inicio");
     } catch (error) {
       console.error("Error en login:", error);
-      alert("No puedes ingresar, no tienes acceso.");
+
+      if (import.meta.env.DEV || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        console.warn("Microsoft no responde; usando acceso local de desarrollo.");
+        allowLocalAccess();
+        return;
+      }
+
+      alert("No puedes ingresar, no tienes acceso. Revisa tu cuenta o contacta al administrador.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleLocalLogin = () => {
+    allowLocalAccess();
   };
 
   return (
@@ -87,6 +123,16 @@ export default function Login() {
             <FaWindows className="text-lg" />
             {loading ? "Conectando..." : "Iniciar sesión con Microsoft"}
           </button>
+
+          {(import.meta.env.DEV || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") && (
+            <button
+              type="button"
+              onClick={handleLocalLogin}
+              className="mt-3 w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-slate-300 bg-white text-slate-700 font-semibold hover:bg-slate-50 transition-all duration-200"
+            >
+              Entrar en modo local
+            </button>
+          )}
 
           <p className="mt-8 text-center lg:text-left text-xs text-slate-400">
             Solo usuarios autorizados podrán acceder a la plataforma.

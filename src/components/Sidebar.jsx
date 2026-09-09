@@ -55,6 +55,39 @@ const slugifyCategoria = (value = "") =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+const rutasPorCategoria = {
+  "Inmuebles": {
+    inventario: "/activos/inmuebles/inventario",
+    ingresar: "/activos/inmuebles/ingresar",
+    editar: "/activos/inmuebles/editar",
+    eliminar: "/activos/inmuebles/eliminar",
+  },
+  "Mobiliario y equipo": {
+    inventario: "/activos/mobiliario-y-equipo/inventario",
+    ingresar: "/activos/mobiliario-y-equipo/ingresar",
+    editar: "/activos/mobiliario-y-equipo/editar",
+    eliminar: "/activos/mobiliario-y-equipo/eliminar",
+  },
+  "Equipo de cómputo": {
+    inventario: "/activos/equipo-de-computo/inventario",
+    ingresar: "/activos/equipo-de-computo/ingresar",
+    editar: "/activos/equipo-de-computo/editar",
+    eliminar: "/activos/equipo-de-computo/eliminar",
+  },
+  "Vehículos": {
+    inventario: "/activos/vehiculos/inventario",
+    ingresar: "/activos/vehiculos/ingresar",
+    editar: "/activos/vehiculos/editar",
+    eliminar: "/activos/vehiculos/eliminar",
+  },
+  "Otros activos": {
+    inventario: "/activos/otros-activos/inventario",
+    ingresar: "/activos/otros-activos/ingresar",
+    editar: "/activos/otros-activos/editar",
+    eliminar: "/activos/otros-activos/eliminar",
+  },
+};
+
 export default function Sidebar({ open = false, onClose = () => {} }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -202,8 +235,12 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
                 { nombre: "Otros activos", icono: <FaBoxes /> },
               ].map((categoria) => {
                 const abierta = categoriaActiva === categoria.nombre;
-                const parametro = encodeURIComponent(categoria.nombre);
-                const rutaInventario = `/equipos/inventario/${slugifyCategoria(categoria.nombre)}`;
+                const rutas = rutasPorCategoria[categoria.nombre] || {
+                  inventario: `/equipos/inventario/${slugifyCategoria(categoria.nombre)}`,
+                  ingresar: `/equipos/crear?categoria=${encodeURIComponent(categoria.nombre)}`,
+                  editar: `/equipos/editar?categoria=${encodeURIComponent(categoria.nombre)}`,
+                  eliminar: `/equipos/eliminar?categoria=${encodeURIComponent(categoria.nombre)}`,
+                };
 
                 return (
                   <div key={categoria.nombre}>
@@ -217,11 +254,11 @@ export default function Sidebar({ open = false, onClose = () => {} }) {
                     </button>
                     {abierta && (
                       <div className="ml-6 mt-1 flex flex-col gap-1 border-l border-blue-400/30 pl-3">
-                        <Link to={rutaInventario} className={subLinkClass(false)}><FaClipboardList /> Inventario</Link>
+                        <Link to={rutas.inventario} className={subLinkClass(false)}><FaClipboardList /> Inventario</Link>
                         {isAdminRole(rol) && <>
-                          <Link to={`/equipos/crear?categoria=${parametro}`} className={subLinkClass(false)}><FaUpload /> Ingresar</Link>
-                          <Link to={`/equipos/editar?categoria=${parametro}`} className={subLinkClass(false)}><FaEdit /> Editar</Link>
-                          <Link to={`/equipos/eliminar?categoria=${parametro}`} className={subLinkClass(false)}><FaTrash /> Eliminar</Link>
+                          <Link to={rutas.ingresar} className={subLinkClass(false)}><FaUpload /> Ingresar</Link>
+                          <Link to={rutas.editar} className={subLinkClass(false)}><FaEdit /> Editar</Link>
+                          <Link to={rutas.eliminar} className={subLinkClass(false)}><FaTrash /> Eliminar</Link>
                         </>}
                       </div>
                     )}

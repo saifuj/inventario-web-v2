@@ -5,7 +5,22 @@ import EquiposService from "../../services/EquiposServices";
 
 const PAGE_SIZE = 14;
 
+const obtenerCategoriaActual = () => {
+  const params = new URLSearchParams(window.location.search);
+  const categoriaQuery = params.get("categoria");
+  if (categoriaQuery) return decodeURIComponent(categoriaQuery);
+
+  const pathname = window.location.pathname;
+  if (pathname.includes("/inmuebles/")) return "Inmuebles";
+  if (pathname.includes("/mobiliario-y-equipo/")) return "Mobiliario y equipo";
+  if (pathname.includes("/equipo-de-computo/")) return "Equipo de cómputo";
+  if (pathname.includes("/vehiculos/")) return "Vehículos";
+  if (pathname.includes("/otros-activos/")) return "Otros activos";
+  return "";
+};
+
 const EliminarEquipos = () => {
+  const categoriaActual = useMemo(() => obtenerCategoriaActual(), []);
   const [equipos, setEquipos] = useState([]);
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -29,7 +44,12 @@ const EliminarEquipos = () => {
         : Array.isArray(res.data?.$values)
         ? res.data.$values
         : [];
-      setEquipos(lista);
+
+      const listaFiltrada = categoriaActual
+        ? lista.filter((equipo) => equipo.categoria === categoriaActual)
+        : lista;
+
+      setEquipos(listaFiltrada);
     } catch (err) {
       console.error("Error al cargar equipos", err);
       toast.error("❌ Error al obtener los equipos");
@@ -40,7 +60,7 @@ const EliminarEquipos = () => {
 
   useEffect(() => {
     cargarEquipos();
-  }, []);
+  }, [categoriaActual]);
 
   const handleFiltroChange = (e) => {
     const { name, value } = e.target;
@@ -78,9 +98,11 @@ const EliminarEquipos = () => {
         (equipo.fechaIngreso &&
           new Date(equipo.fechaIngreso).toISOString().split("T")[0] === fechaExacta);
 
-      return okCod && okMarca && okModelo && okTipo && okFecha;
+      const okCategoria = !categoriaActual || equipo.categoria === categoriaActual;
+
+      return okCategoria && okCod && okMarca && okModelo && okTipo && okFecha;
     });
-  }, [equipos, filtros]);
+  }, [equipos, filtros, categoriaActual]);
 
   const totalPages = Math.max(1, Math.ceil(equiposFiltrados.length / PAGE_SIZE));
   const pageSafe = Math.min(page, totalPages);

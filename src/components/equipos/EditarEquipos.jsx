@@ -1,10 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import EquiposServices from "../../services/EquiposServices";
 import UbicacionesService from "../../services/UbicacionesServices";
 import { CATEGORIAS_ACTIVOS, obtenerCategoria } from "./catalogoActivos";
 
+const obtenerCategoriaActual = () => {
+  const params = new URLSearchParams(window.location.search);
+  const categoriaQuery = params.get("categoria");
+  if (categoriaQuery) return decodeURIComponent(categoriaQuery);
+
+  const pathname = window.location.pathname;
+  if (pathname.includes("/inmuebles/")) return "Inmuebles";
+  if (pathname.includes("/mobiliario-y-equipo/")) return "Mobiliario y equipo";
+  if (pathname.includes("/equipo-de-computo/")) return "Equipo de cómputo";
+  if (pathname.includes("/vehiculos/")) return "Vehículos";
+  if (pathname.includes("/otros-activos/")) return "Otros activos";
+  return "";
+};
+
 const EditarEquipo = () => {
+  const categoriaActual = useMemo(() => obtenerCategoriaActual(), []);
   const [codificacion, setCodificacion] = useState("");
   const [equipo, setEquipo] = useState(null);
   const [ubicaciones, setUbicaciones] = useState([]);
@@ -21,6 +36,13 @@ const EditarEquipo = () => {
     try {
       setLoadingBuscar(true);
       const { data } = await EquiposServices.obtenerPorCodificacion(cod);
+
+      if (categoriaActual && data?.categoria && data.categoria !== categoriaActual) {
+        toast.error(`Este equipo pertenece a ${data.categoria} y no a ${categoriaActual}.`);
+        setEquipo(null);
+        return;
+      }
+
       setEquipo(data);
     } catch {
       toast.error("Equipo no encontrado");
