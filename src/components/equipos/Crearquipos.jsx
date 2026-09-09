@@ -45,7 +45,6 @@ const CrearEquipo = () => {
     tipoCombustible: "",
     categoriaVehiculo: "",
     colorVehiculo: "",
-    estadoFisico: "",
     historialReparaciones: "",
     programacionMantenimiento: "",
     alertasServicio: "",

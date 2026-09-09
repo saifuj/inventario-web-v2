@@ -5,30 +5,38 @@ import { useIsAuthenticated } from "@azure/msal-react";
 import Inicio from "./pages/Inicio";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
-import CrearEquipo from "./components/equipos/Crearquipos";
-import ListaEquipos from "./components/equipos/ListaEquipos";
-import EditarEquipo from "./components/equipos/EditarEquipos";
-import EliminarEquipos from "./components/equipos/EliminarEquipos";
-import CrearSolicitud from "./components/solicitudes/CrearSolicitud";
-import ListaSolicitud from "./components/solicitudes/ListaSolicitud";
-import EliminarSolicitud from "./components/solicitudes/EliminarSolicitud";
-import BajaActivosForm from "./components/formatos/BajaActivo/BajaActivo";
-import ListabajaAtivos from "./components/formatos/BajaActivo/ListaBajaActivo";
-import { generarBajaPDF } from "./components/formatos/BajaActivo/BajaActivoPDF";
-import HojaResponsabilidad from "./components/formatos/HojaResponsabilidad/HojaResponsabilidad";
-import ListaHojasResponsabilidad from "./components/formatos/HojaResponsabilidad/ListaHojaResponsabilidad";
-import HojaResponsabilidadEdit from "./components/formatos/HojaResponsabilidad/HojaResponsabilidadEditar";
-import ListaHojaSolvencia from "./components/formatos/HojaSolvencia/ListaHojaSolvencia";
-import HojaSolvencia from "./components/formatos/HojaSolvencia/HojaSolvencia";
-import CrearTraslado from "./components/formatos/Traslados/Traslados";
-import TrasladosLista from "./components/formatos/Traslados/ListaTraslados";
-import Suministros from "./components/suministros/Suministro"
-import SuministrosInventario from "./components/suministros/InventarioSuministros";
-import Movimientos from "./components/suministros/MovimientoSuministro";
-import EliminarSuministros from "./components/suministros/EliminarMovimientos";
-import CrearTrasladoRetorno from "./components/formatos/TrasladosRetorno/TrasladosRetorno";
-import TrasladosRetornoLista from "./components/formatos/TrasladosRetorno/TrasladosRetornoLista";
-import ProtectedRoute from "./components/ProtectedRout";
+
+import {
+  CrearEquipo,
+  ListaEquipos,
+  EditarEquipo,
+  EliminarEquipos,
+} from "./modules/activos";
+import {
+  CrearSolicitud,
+  ListaSolicitud,
+  EliminarSolicitud,
+} from "./modules/solicitudes";
+import {
+  BajaActivosForm,
+  ListabajaAtivos,
+  generarBajaPDF,
+  HojaResponsabilidad,
+  ListaHojasResponsabilidad,
+  HojaResponsabilidadEdit,
+  ListaHojaSolvencia,
+  HojaSolvencia,
+  CrearTraslado,
+  TrasladosLista,
+  CrearTrasladoRetorno,
+  TrasladosRetornoLista,
+} from "./modules/formatos";
+import {
+  Suministros,
+  SuministrosInventario,
+  Movimientos,
+  EliminarSuministros,
+} from "./modules/suministros";
 
 function RequireAuth({ children }) {
   const isAuthenticated = useIsAuthenticated();
