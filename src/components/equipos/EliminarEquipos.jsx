@@ -129,7 +129,7 @@ const EliminarEquipos = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-52px)] flex items-start justify-center pt-6 overflow-hidden">
+    <div className="h-[calc(100vh-52px)] flex items-start justify-center pt-6 overflow-y-auto">
       <div className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden h-[calc(100vh-90px)] flex flex-col">
         <div className="px-6 py-4 border-b border-slate-100">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">

@@ -99,7 +99,7 @@ const EditarEquipo = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-52px)] flex items-start justify-center pt-10 overflow-hidden">
+    <div className="h-[calc(100vh-52px)] flex items-start justify-center pt-10 overflow-y-auto">
       <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
         <div className="px-6 py-5 border-b border-slate-100">
           <h1 className="text-xl font-bold text-slate-900">Editar equipo</h1>

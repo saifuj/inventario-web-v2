@@ -109,7 +109,7 @@ const CrearEquipo = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-52px)] bg-slate-50 px-4 py-8">
+    <div className="min-h-[calc(100vh-52px)] bg-slate-50 px-4 py-8 overflow-y-auto">
       <div className="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="border-b border-slate-200 px-6 py-5">
           <h1 className="text-xl font-bold text-slate-900">Crear activo</h1>

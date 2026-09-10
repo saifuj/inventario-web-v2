@@ -24,7 +24,7 @@ const Layout = () => {
           <span className="font-extrabold tracking-wide">INVENTARIO</span>
         </header>
 
-        <main className="flex-1 p-6 bg-slate-100 overflow-hidden relative">
+        <main className="flex-1 p-6 bg-slate-100 overflow-y-auto overflow-x-hidden relative">
           <Outlet />
         </main>
 
